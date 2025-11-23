@@ -11,6 +11,7 @@
         <input type="password" id="password" name="password" required><br>
         <label for="password_match">Please reenter your Password:</label><br>
         <input type="password" id="password_match" name="password_match" required oninput="match()"><br>
+        <div id="match_warn"></div>
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br>
         <p><input type="submit" name="submit" value="Register"></p>
@@ -19,10 +20,13 @@
         function match() {
             password = document.getElementById('password');
             match = document.getElementById('password_match');
+            warning = document.getElementById('match_warn');
             if (password.value != match.value) {
                 match.setCustomValidity('Passwords do not match.');
+                warning.innerHTML = "Passwords do not match."
             } else {
                 match.setCustomValidty('');
+                warning.innerHTML= "";
             }
         }
     </script>
