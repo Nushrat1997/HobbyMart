@@ -9,10 +9,23 @@
         <input type="email" id="email" name="email" required><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br>
+        <label for="password_match">Please reenter your Password:</label><br>
+        <input type="password" id="password_match" name="password_match" required oninput="match()"><br>
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br>
         <p><input type="submit" name="submit" value="Register"></p>
     </form>
+    <script>
+        function match() {
+            password = document.getElementById('password');
+            match = document.getElementById('password_match');
+            if (password.value != match.value) {
+                match.setCustomValidity('Passwords do not match.');
+            } else {
+                match.setCustomValidty('');
+            }
+        }
+    </script>
 <?php
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         switch ($_POST['submit']) {
