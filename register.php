@@ -9,6 +9,8 @@
         <input type="email" id="email" name="email" required><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
         <p><input type="submit" name="submit" value="Register"></p>
     </form>
 <?php
@@ -16,10 +18,10 @@
         switch ($_POST['submit']) {
             case 'Register':
                 $conn = new mysqli('localhost','register','register','HOBBYMART');
-                // Check for an existing email and sanitise inputs 
+                // Check for an existing email and sanitise inputs
                 $hashedPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
                 try {
-                    mysqli_query($conn,"INSERT INTO Users(email,password) VALUES ('{$_POST['email']}','{$hashedPassword}')");
+                    mysqli_query($conn,"INSERT INTO Users(email,password,name,role) VALUES ('{$_POST['email']}','{$hashedPassword}','{$_POST['name']}','user')");
                     echo "Registered.";
                 } catch (mysqli_sql_exception $e) {
                     echo "There was an issue with registration. Please try again or continue as a guest.";
@@ -37,6 +39,8 @@
                         userID INT AUTO_INCREMENT PRIMARY KEY,
                         email VARCHAR(80) NOT NULL,
                         password VARCHAR(255) NOT NULL,
+                        name VARCHAR(40) NOT NULL,
+                        role VARCHAR(20) NOT NULL,
                         UNIQUE(email)
                     )"
                 );
