@@ -6,9 +6,10 @@
     <form method="post"><input type="submit" name="submit" value="Reset Tables"></form>
     <form method="post">
         <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
+        <input type="email" id="email" name="email" required pattern="^.*@.*\..*"><br>
         <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
+        <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|\W)).{8,}$" oninput="validate(this)"><br>
+        <div id="invalid_warn"></div>
         <label for="password_match">Please reenter your Password:</label><br>
         <input type="password" id="password_match" name="password_match" required oninput="match(this)"><br>
         <div id="match_warn"></div>
@@ -17,6 +18,20 @@
         <p><input type="submit" name="submit" value="Register"></p>
     </form>
     <script>
+        function validate(password) {
+            warning = document.getElementById("invalid_warn");
+            requirements = ["A valid password must contain:<br>"];
+            if (!password.checkValidity()) {
+                if (!(/^(?=.*[A-Z])/.test(password.value))) {requirements.push("at least 1 uppercase letter<br>")}
+                if (!(/^(?=.*[a-z])/.test(password.value))) {requirements.push("at least 1 lowercase letter<br>")}
+                if (!(/^(?=.*\d)/.test(password.value))) {requirements.push("at least 1 digit<br>")}
+                if (!(/^(?=.*(_|\W))/.test(password.value))) {requirements.push("at least 1 special character<br>")}
+                if (!(/^.{8,}$/.test(password.value))) {requirements.push("at least 8 characters<br>")}
+                warning.innerHTML = requirements.reduce((current,next)=> current + next);
+            } else {
+                warning.innerHTML = "";
+            }
+        }
         function match(match) {
             warning = document.getElementById('match_warn');
             if (match.value != document.getElementById('password').value) {
