@@ -40,7 +40,7 @@
                 if ($exists == 0) {
                     $hashedPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
                     try {
-                        $insert = $conn->prepare("INSERT INTO Users(email,password,name,role) VALUES(?,'{$hashedPassword}',?,'user')");
+                        $insert = $conn->prepare("INSERT INTO Users(email,password,name) VALUES(?,'{$hashedPassword}',?)");
                         $insert->bind_param('ss',$_POST['email'],$_POST['name']);
                         $insert->execute();
                         echo "Registered.";
@@ -56,15 +56,16 @@
                 $conn = new mysqli('localhost','root', '', 'HOBBYMART');
                 $user = "register";
                 mysqli_query($conn, "DROP TABLE IF EXISTS Users");
+
                 mysqli_query($conn, "CREATE USER IF NOT EXISTS '" . $user .  "'@'localhost' identified by '" . $user . "'");
                 mysqli_query(
                     $conn,
-                    "CREATE TABLE IF NOT EXISTS Users(
+                    "CREATE TABLE Users(
                         userID INT AUTO_INCREMENT PRIMARY KEY,
                         email VARCHAR(80) NOT NULL,
                         password VARCHAR(255) NOT NULL,
                         name VARCHAR(40) NOT NULL,
-                        role VARCHAR(20) NOT NULL,
+                        role VARCHAR(20) NOT NULL DEFAULT 'user',
                         UNIQUE(email)
                     )"
                 );
