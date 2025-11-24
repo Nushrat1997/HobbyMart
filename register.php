@@ -33,12 +33,16 @@
         switch ($_POST['submit']) {
             case 'Register':
                 $conn = new mysqli('localhost','register','register','HOBBYMART');
-                // Check for an existing email and sanitise inputs
-                $exists = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) AS registered FROM Users WHERE email='{$_POST['email']}'"))['registered'];
+                $check = $conn->prepare("SELECT COUNT(*) AS registered FROM Users WHERE email=?");
+                $check->bind_param('s',$_POST['email']);
+                $check->execute();
+                $exists = ($check->get_result())->fetch_assoc()['registered'];
                 if ($exists == 0) {
                     $hashedPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
                     try {
-                        mysqli_query($conn,"INSERT INTO Users(email,password,name,role) VALUES ('{$_POST['email']}','{$hashedPassword}','{$_POST['name']}','user')");
+                        $insert = $conn->prepare("INSERT INTO Users(email,password,name,role) VALUES(?,'{$hashedPassword}',?,'user')");
+                        $insert->bind_param('ss',$_POST['email'],$_POST['name']);
+                        $insert->execute();
                         echo "Registered.";
                     } catch (mysqli_sql_exception $e) {
                         echo "There was an issue with registration. Please try again or continue as a guest.";
