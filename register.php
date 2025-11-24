@@ -10,23 +10,21 @@
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br>
         <label for="password_match">Please reenter your Password:</label><br>
-        <input type="password" id="password_match" name="password_match" required oninput="match()"><br>
+        <input type="password" id="password_match" name="password_match" required oninput="match(this)"><br>
         <div id="match_warn"></div>
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br>
         <p><input type="submit" name="submit" value="Register"></p>
     </form>
     <script>
-        function match() {
-            password = document.getElementById('password');
-            match = document.getElementById('password_match');
+        function match(match) {
             warning = document.getElementById('match_warn');
-            if (password.value != match.value) {
+            if (match.value != document.getElementById('password').value) {
                 match.setCustomValidity('Passwords do not match.');
-                warning.innerHTML = "Passwords do not match."
+                warning.innerHTML = "Passwords do not match.";
             } else {
-                match.setCustomValidty('');
-                warning.innerHTML= "";
+                match.setCustomValidity('');
+                warning.innerHTML = "";
             }
         }
     </script>
@@ -36,12 +34,17 @@
             case 'Register':
                 $conn = new mysqli('localhost','register','register','HOBBYMART');
                 // Check for an existing email and sanitise inputs
-                $hashedPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
-                try {
-                    mysqli_query($conn,"INSERT INTO Users(email,password,name,role) VALUES ('{$_POST['email']}','{$hashedPassword}','{$_POST['name']}','user')");
-                    echo "Registered.";
-                } catch (mysqli_sql_exception $e) {
-                    echo "There was an issue with registration. Please try again or continue as a guest.";
+                $exists = mysqli_fetch_assoc(mysqli_query($conn,"SELECT COUNT(*) AS registered FROM Users WHERE email='{$_POST['email']}'"))['registered'];
+                if ($exists == 0) {
+                    $hashedPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
+                    try {
+                        mysqli_query($conn,"INSERT INTO Users(email,password,name,role) VALUES ('{$_POST['email']}','{$hashedPassword}','{$_POST['name']}','user')");
+                        echo "Registered.";
+                    } catch (mysqli_sql_exception $e) {
+                        echo "There was an issue with registration. Please try again or continue as a guest.";
+                    }
+                } else {
+                    echo "A user with this email address already exists. Please register a different email address.";
                 }
                 mysqli_close($conn);
                 break;
