@@ -70,8 +70,8 @@
             case 'Reset Tables':
                 $conn = new mysqli('localhost','root', '', 'HOBBYMART');
                 $user = "register";
+                mysqli_query($conn, "DROP USER IF EXISTS '" . $user . "'@'localhost'");
                 mysqli_query($conn, "DROP TABLE IF EXISTS Users");
-
                 mysqli_query($conn, "CREATE USER IF NOT EXISTS '" . $user .  "'@'localhost' identified by '" . $user . "'");
                 mysqli_query(
                     $conn,
