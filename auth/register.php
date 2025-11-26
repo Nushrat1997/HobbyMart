@@ -1,9 +1,8 @@
 <?php
-//    echo $_SERVER['PHP_SELF'];
-//    error_reporting(E_ALL);
-//    ini_set('display_errors', 'On');
+    session_start();
 ?>
-    <form method="post"><input type="submit" name="submit" value="Reset Tables"></form>
+<form method="post"><input type="submit" name="submit" value="Reset Tables"></form>
+<?php function register() { ?>
     <form method="post">
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" required pattern="^.*@.*\..*"><br>
@@ -43,8 +42,14 @@
             }
         }
     </script>
+<?php } ?>
 <?php
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // Check if the $_SESSION superglobal has an id value; if not, show the registration form
+    if (!isset($_SESSION['id'])) {
+        register();
+    }
+    // If posting registration values without a valid session id, try to create the user
+    if ($_SERVER['REQUEST_METHOD'] == "POST" && !isset($_SESSION['id'])) {
         switch ($_POST['submit']) {
             case 'Register':
                 $conn = new mysqli('localhost','register','register','HOBBYMART');
@@ -67,6 +72,11 @@
                 }
                 mysqli_close($conn);
                 break;
+        }
+    }
+    // Separate out database refresh to be able to use in various test situations
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        switch ($_POST['submit']) {
             case 'Reset Tables':
                 $conn = new mysqli('localhost','root', '', 'HOBBYMART');
                 $user = "register";
