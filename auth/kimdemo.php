@@ -73,11 +73,8 @@
         <?php if ($_POST['submit'] != "Register New User") { ?>
         <input type="submit" name="submit" value="Register New User"><br>
         <?php } ?>
-        <?php if (isset($_SESSION['id'])) { ?>
-        <input type="submit" name="submit" value="Logout"><br>
-        <?php } else { ?>
         <input type="submit" name="submit" value="Fake Login"><br>
-        <?php } ?>
+        <input type="submit" name="submit" value="Logout"><br>
     </form>
 
 </html>
