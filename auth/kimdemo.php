@@ -64,7 +64,7 @@
     <?php 
         if ($_POST['submit'] == "Register New User" || $_POST['submit'] == "Register") {
             registration();
-        } else {
+        }
     ?>
     <form method="post">
         <?php if ($_SERVER['REQUEST_METHOD'] == "GET") { ?>
@@ -79,8 +79,5 @@
         <input type="submit" name="submit" value="Fake Login"><br>
         <?php } ?>
     </form>
-    <?php
-        }
-    ?>
 
 </html>
