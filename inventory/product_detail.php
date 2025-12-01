@@ -5,10 +5,16 @@
 // ============================================
 
 // Connect to database
-$conn = new mysqli('localhost', 'register', 'register', 'DEMOKIM');
+// Correct Database Connection
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "hobbymart";
+
+$conn = new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
-    die("Database connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 // Get product ID from URL
