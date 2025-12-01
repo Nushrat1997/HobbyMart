@@ -5,8 +5,17 @@
 // ============================================
 
 // Database connection
-$conn = new mysqli('localhost', 'register', 'register', 'DEMOKIM');
-if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+// Correct Database Connection
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "hobbymart";
+
+$conn = new mysqli($host, $user, $pass, $db);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 // Check if ID is provided
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
