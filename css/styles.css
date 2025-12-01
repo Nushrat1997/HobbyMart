@@ -1,1 +1,133 @@
+/*
+Code written by Christa MacNeil
+Course: CST8319 Section: 450 
+File name:style.css
+Description: Styling that applies to all pages*/
+
+/* CSS Reset */
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+/* END CSS Reset*/
+
+/*Global Styles for all pages*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    color: #333; 
+    background-color: #f9f9f9
+}
+/* END Global Styles for all pages*/
+
+/* Header Styles */
+h1, h2, h3 {
+    margin-bottom: 15px;
+    color: #0055aa;
+}
+/* END Header Styles */
+
+/* Navigation Styles */
+nav {
+    margin-bottom: 25px;
+    background-color: #0055aa;
+    padding: 12px 20px;
+    border-radius: 6px;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: bold;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+/* END Navigation Styles */
+
+/*Container Styles*/
+.container, .card {
+    background:white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    margin-bottom: 25px;
+}
+/* END Container Styles */
+
+/*Form Styles*/
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+input[type="text"], input[type="number"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+/* END Form Styles */
+
+/* Button Styles */
+a.btn, input[type="submit"], button {
+    background-color: #0055aa;
+    color: white;
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+a.btn:hover, input[type="submit"]:hover, button:hover {
+    background-color: #003f7d;
+}
+/* END Button Styles */
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+th {
+    background-color: #e7e7e7;
+    color: #0055aa;
+}
+/* END Table Styles */
+
+/* Page Spacing */
+.section {
+    margin-bottom: 30px;
+}
+/* END Page Spacing */
+
+/* Footer Styles */
+footer {    
+    text-align: center;
+    margin-top: auto;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}  
+/* END Footer Styles */
+
 

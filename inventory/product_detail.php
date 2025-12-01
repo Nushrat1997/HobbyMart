@@ -24,7 +24,7 @@ $product = $result->fetch_assoc();
 <head>
     <title>Product Details</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="inventory.css">
+    <link rel="stylesheet" href="../css/inventory.css">
 </head>
 <body>
 <h2><?php echo htmlspecialchars($product['name']); ?></h2>

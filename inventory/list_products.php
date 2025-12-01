@@ -21,7 +21,7 @@ $result = $conn->query($query);
 <head>
     <title>Product List - HobbyMart</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="inventory.css">
+    <link rel="stylesheet" href="../css/inventory.css">
 </head>
 <body>
 <h2>Product List</h2>

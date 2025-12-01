@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Edit Product</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="inventory.css">
+    <link rel="stylesheet" href="../css/inventory.css">
 </head>
 <body>
 <h2>Edit Product</h2>
