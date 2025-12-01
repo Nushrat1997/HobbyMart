@@ -1,0 +1,38 @@
+/* ============================================
+   Inventory Module Styling
+   Author: Xinrui Huang
+   ============================================ */
+
+   body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    color: #0055aa;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+a.btn, input[type="submit"] {
+    background-color: #0055aa;
+    color: white;
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+a.btn:hover, input[type="submit"]:hover {
+    background-color: #003f7d;
+}
