@@ -5,8 +5,17 @@
 // ============================================
 
 // Database connection
-$conn = new mysqli('localhost', 'register', 'register', 'DEMOKIM');
-if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+// Correct Database Connection
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "hobbymart";
+
+$conn = new mysqli($host, $user, $pass, $db);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize form input
