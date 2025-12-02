@@ -87,3 +87,78 @@ Without a false session created, click 'Logout'. The resulting message should re
 
 ---
 
+# 🛍️ HobbyMart – Product Inventory Module
+
+## 👤 Author: Xinrui Huang
+
+### ✅ Features Implemented
+- Developed a complete **Product Inventory Module** with Create, Read, Update, and Delete functionalities.  
+- Implemented secure database connection using **MySQLi** and integrated with the `hobbymart` database.  
+- Used **prepared statements** to prevent SQL injection and ensure data safety.  
+- Created a user-friendly interface across all product pages.  
+- Applied consistent design using `inventory.css`, matching the project’s global theme.  
+- Added success and error messages for real-time feedback.  
+
+---
+
+## ⚙️ How to Run the Product Inventory Module
+
+### 1. Database Setup
+- Open **phpMyAdmin** and create a database named **`hobbymart`**.  
+- Create a table named **`Products`** with fields for product ID, name, description, price, stock, and image.  
+- Insert several sample products (e.g., Watercolor Set, 3D Printer Filament, Sketchbook A4) to test CRUD operations.
+
+### 2. File Location
+Place the `inventory` folder inside your HobbyMart project directory:
+C:\xampp\htdocs\HobbyMart\inventory\
+
+### 3. Start the Server
+Open **XAMPP Control Panel**, then click **Start** for both **Apache** and **MySQL**.
+
+### 4. Run in Browser
+In your browser, open: http://localhost/HobbyMart/inventory/list_products.php
+
+You can now view, add, edit, or delete products in real time.
+
+---
+
+## 🧪 Testing Performed
+- **Add Product:** Successfully inserted new product data into the database.  
+- **Edit Product:** Updated existing records correctly.  
+- **Delete Product:** Deleted selected items and displayed confirmation message.  
+- **Display List:** All products displayed correctly in a formatted table.  
+- **Validation:** Error messages displayed when fields were missing or invalid.  
+
+---
+
+## 🧰 Notes
+- Database credentials:  
+  - **Username:** `root`  
+  - **Password:** *(empty)*  
+- Module aligns with the project’s UML and class diagrams.  
+- Consistent layout achieved through `inventory.css`.  
+- Each file includes form validation and proper error handling.  
+
+---
+
+## 🧩 Version Control and Collaboration
+Code maintained in the shared GitHub repository:  
+[https://github.com/Nushrat1997/HobbyMart](https://github.com/Nushrat1997/HobbyMart)  
+
+Commit messages include:
+- “Added Product Inventory CRUD module (Xinrui Huang)”  
+- “Fixed parameter mismatch in add_product.php”  
+- “Unified CSS and improved delete confirmation UI”  
+
+---
+
+## 🔮 Next Steps
+- Add **role-based admin access control**.  
+- Enable **image file uploads** instead of text paths.  
+- Implement **search and pagination** for large datasets.  
+- Integrate with the **Shopping Cart module**.  
+
+---
+
+## 📅 Last Updated
+**November 30, 2025 – Product Inventory Module (Xinrui Huang)**  
