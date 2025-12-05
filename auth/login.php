@@ -63,8 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php endif; ?>
 
     <form action="" method="POST">
-        <input type="email" name="email" placeholder="Email" value="<?php echo $email; ?>">
-        <input type="password" name="password" placeholder="Password">
+        <input type="email" name="email" required placeholder="Email" value="<?php echo $email; ?>">
+        <input type="password" name="password" required placeholder="Password">
         <button type="submit">Log In</button>
     </form>
 </div>
