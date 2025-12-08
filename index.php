@@ -36,9 +36,11 @@
     }
 
     // Access the login page
-    function login() {
-        include "auth/login.php";
+    function getLogin() {
+        if (!isset($_SESSION['id'])) {
+            include "auth/login.php";
+        }
     }
 ?>
 
-<?php dB_create(); login(); ?>
+<?php dB_create(); getLogin(); ?>
