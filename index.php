@@ -41,6 +41,25 @@
             include "auth/login.php";
         }
     }
+
+    // Access the registration page
+    function getRegistration() {
+        if (!isset($_SESSION['id'])) {
+            include "auth/register.php";
+        }
+    }
 ?>
 
-<?php dB_create(); getLogin(); ?>
+
+
+<?php
+    dB_create();
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
+        getRegistration();
+    }
+    // Page to go to if continuing as guest, or successfully logged on
+    // elseif (isset($_SESSION['id']) || ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['guest']))) {}
+    else {
+        getLogin();
+    }
+?>

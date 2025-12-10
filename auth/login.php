@@ -61,11 +61,15 @@
         <?php if (!isset($_SESSION['id'])) { ?>
             <div class="container">
                 <h2>Login</h2>
-                    <form action="" method="POST">
-                        <input type="email" name="email" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
-                        <input type="password" name="password" required placeholder="Password">
-                        <button type="submit">Log In</button>
-                    </form>
+                <form action="" method="POST">
+                    <input type="email" name="email" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
+                    <input type="password" name="password" required placeholder="Password">
+                    <button type="submit">Log In</button>
+                </form>
+                <form method="post">
+                    <input type ="submit" name="register" value="Register">
+                    <input type ="submit" name="guest" value="Continue as Guest">
+                </form>
             </div>
         <?php } ?>
     </body>
