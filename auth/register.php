@@ -1,19 +1,25 @@
 <?php
     session_start();
+
+    function register() {
+    // Check if the $_SESSION superglobal has an id value; if not, show the registration form
+        if (!isset($_SESSION['id'])) {
 ?>
-<?php function register() { ?>
     <form method="post">
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required pattern="^.*@.*\..*"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|\W)).{8,}$" oninput="validate(this)"><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="Email" pattern="^.*@.*\..*"><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|\W)).{8,}$" oninput="validate(this)"><br>
         <div id="invalid_warn"></div>
-        <label for="password_match">Please reenter your Password:</label><br>
-        <input type="password" id="password_match" name="password_match" required oninput="match(this)"><br>
+        <label for="password_match">Please reenter your Password:</label>
+        <input type="password" id="password_match" name="password_match" required placeholder="Reenter password" oninput="match(this)"><br>
         <div id="match_warn"></div>
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Name"><br>
         <p><input type="submit" name="submit" value="Register"></p>
+    </form>
+    <form method="post">
+        <input type="submit" name="login" value="Return to login">
     </form>
     <script>
         function validate(password) {
@@ -41,8 +47,11 @@
             }
         }
     </script>
-<?php } ?>
 <?php
+    } else {
+        echo "You are already logged in!";
+    }
+}
     // If posting registration values without a valid session id, try to create the user
     if ($_POST['submit'] == "Register" && !isset($_SESSION['id'])) {
         $conn = new mysqli('localhost','auth','auth','HOBBYMART');
@@ -57,7 +66,6 @@
                 $insert->bind_param('ss',$_POST['email'],$_POST['name']);
                 $insert->execute();
                 header("Location: http://localhost/hobbymart/?registration=success");
-                echo "Registered.";
             } catch (mysqli_sql_exception $e) {
                 echo "There was an issue with registration. Please try again or continue as a guest.";
             }
@@ -66,10 +74,50 @@
         }
         mysqli_close($conn);
     }
-    // Check if the $_SESSION superglobal has an id value; if not, show the registration form
-    if (!isset($_SESSION['id'])) {
-        register();
-    } else {
-        echo "You are already logged in!";
-    }
 ?>
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body { 
+                font-family: Arial; 
+                background-color: #f4f4f4; 
+            }
+            .container {
+                width: 350px; 
+                margin: 100px auto; 
+                padding: 20px; 
+                background: white; 
+                border-radius: 8px; 
+                box-shadow: 0px 0px 10px #ccc;
+            }
+            input, button {
+                width: 100%; 
+                padding: 10px; 
+                margin-top: 10px;
+            }
+            input[value=Register] {
+                background-color: #007bff; 
+                border: none; 
+                color: white; 
+                cursor: pointer;
+            }
+            button {
+                background-color: #007bff; 
+                border: none; 
+                color: white; 
+                cursor: pointer;
+            }
+            .error { color: red; }
+            .success { color: green; }
+        </style>
+        <title>HobbyMart Registration</title>
+    </head>
+    <body>
+        <div class="container">
+        <?php register(); ?>
+        </div>
+    </body>
+</html>
