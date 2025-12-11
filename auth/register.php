@@ -51,7 +51,7 @@
     }
     // If posting registration values without a valid session id, try to create the user
     if ($_POST['submit'] == "Register" && !isset($_SESSION['id'])) {
-        $conn = new mysqli('localhost','register','register','DEMOKIM');
+        $conn = new mysqli('localhost','auth','auth','HOBBYMART');
         $check = $conn->prepare("SELECT COUNT(*) AS registered FROM Users WHERE email=?");
         $check->bind_param('s',$_POST['email']);
         $check->execute();

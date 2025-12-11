@@ -54,7 +54,7 @@
 
 <?php
     dB_create();
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['register']) || $_POST['submit'] == "Register")) {
         getRegistration();
     }
     // Page to go to if continuing as guest, or successfully logged on
