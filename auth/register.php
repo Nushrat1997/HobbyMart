@@ -43,12 +43,6 @@
     </script>
 <?php } ?>
 <?php
-    // Check if the $_SESSION superglobal has an id value; if not, show the registration form
-    if (!isset($_SESSION['id'])) {
-        register();
-    } else {
-        echo "You are already logged in!";
-    }
     // If posting registration values without a valid session id, try to create the user
     if ($_POST['submit'] == "Register" && !isset($_SESSION['id'])) {
         $conn = new mysqli('localhost','auth','auth','HOBBYMART');
@@ -62,6 +56,7 @@
                 $insert = $conn->prepare("INSERT INTO Users(email,password,name) VALUES(?,'{$hashedPassword}',?)");
                 $insert->bind_param('ss',$_POST['email'],$_POST['name']);
                 $insert->execute();
+                header("Location: http://localhost/hobbymart/?registration=success");
                 echo "Registered.";
             } catch (mysqli_sql_exception $e) {
                 echo "There was an issue with registration. Please try again or continue as a guest.";
@@ -70,5 +65,11 @@
             echo "A user with this email address already exists. Please register a different email address.";
         }
         mysqli_close($conn);
+    }
+    // Check if the $_SESSION superglobal has an id value; if not, show the registration form
+    if (!isset($_SESSION['id'])) {
+        register();
+    } else {
+        echo "You are already logged in!";
     }
 ?>

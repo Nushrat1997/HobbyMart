@@ -21,6 +21,11 @@
             }
         }
     }
+    function registered() {
+        if ($_GET['registration'] == "success") {
+            echo "Please log in with your newly registered account.";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -61,14 +66,15 @@
         <?php if (!isset($_SESSION['id'])) { ?>
             <div class="container">
                 <h2>Login</h2>
+                <h3><?php registered(); ?></h3>
                 <form action="" method="POST">
                     <input type="email" name="email" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
                     <input type="password" name="password" required placeholder="Password">
                     <button type="submit">Log In</button>
                 </form>
                 <form method="post">
-                    <input type ="submit" name="register" value="Register">
-                    <input type ="submit" name="guest" value="Continue as Guest">
+                    <input type="submit" name="register" value="Register">
+                    <input type="submit" name="guest" value="Continue as Guest">
                 </form>
             </div>
         <?php } ?>
