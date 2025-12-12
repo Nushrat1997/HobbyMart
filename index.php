@@ -16,11 +16,21 @@
                 UNIQUE(email)
             )"
         );
+        $conn->query(
+            "CREATE TABLE IF NOT EXISTS HOBBYMART.Products(
+                productID INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                description TEXT,
+                price DECIMAL(10,2) NOT NULL,
+                stock INT DEFAULT 0,
+                image VARCHAR(255)
+            )"
+        );
         $conn->query("GRANT SELECT, INSERT, UPDATE ON HOBBYMART.Users TO 'auth'@'localhost'");
-        $check = $conn->prepare("SELECT COUNT(*) AS count FROM HOBBYMART.Users");
-        $check->execute();
-        $exists = ($check->get_result())->fetch_assoc()['count'];
-        if ($exists == 0) {
+        $checkUsers = $conn->prepare("SELECT COUNT(*) AS count FROM HOBBYMART.Users");
+        $checkUsers->execute();
+        $usersExists = ($checkUsers->get_result())->fetch_assoc()['count'];
+        if ($usersExists == 0) {
             $admin = array('admin@hobbymart',password_hash('admin',PASSWORD_DEFAULT),'admin','admin');
             $user = array('test@hobbymart',password_hash('test',PASSWORD_DEFAULT),'test','user');
             $createUsers = $conn->prepare(
@@ -31,6 +41,19 @@
             );
             $createUsers->bind_param('ssssssss',$admin[0],$admin[1],$admin[2],$admin[3],$user[0],$user[1],$user[2],$user[3]);
             $createUsers->execute();
+        }
+        $checkProducts = $conn->prepare("SELECT COUNT(*) AS count FROM HOBBYMART.Products");
+        $checkProducts->execute();
+        $productsExists = ($checkProducts->get_result())->fetch_assoc()['count'];
+        if ($productsExists == 0) {
+            $createProducts = $conn->prepare(
+                "INSERT INTO HOBBYMART.Products(name,description,price,stock,image) VALUES
+                    ('Watercolor Set', '24-color professional watercolor set', 19.99, 20, 'img/watercolor.jpg'),
+                    ('3D Printer Filament', '1kg PLA filament for 3D printing', 24.50, 15, 'img/filament.jpg'),
+                    ('Sketchbook A4', '120gsm paper for drawing', 12.00, 25, 'img/sketchbook.jpg')
+                "
+            );
+            $createProducts->execute();
         }
         $conn->close();
     }
