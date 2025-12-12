@@ -6,8 +6,5 @@
         session_unset();
         // Destroy the session ie. log out
         session_destroy();
-        echo "Successfully logged out.";
-    } else {
-        echo "You are not currently logged in.";
     }
 ?>

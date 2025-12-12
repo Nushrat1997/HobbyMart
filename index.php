@@ -48,17 +48,24 @@
             include "auth/register.php";
         }
     }
-?>
 
+    function getLogout() {
+        if (isset($_SESSION['id']) && isset($_GET['logout'])) {
+            include "auth/logout.php";
+        }
+    }
 
-
-<?php
     dB_create();
+    getLogout();
     if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['register']) || $_POST['submit'] == "Register")) {
         getRegistration();
     }
     // Page to go to if continuing as guest, or successfully logged on
-    // elseif (isset($_SESSION['id']) || ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['guest']))) {}
+    // elseif (isset($_SESSION['id']) || $_SESSION['guest'] || ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['guest']))) {
+        // if (!isset($_SESSION['id'])) {
+            // $_SESSION['guest'] = true;
+        //}
+    //}
     else {
         getLogin();
     }

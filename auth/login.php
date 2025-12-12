@@ -26,6 +26,11 @@
             echo "Please log in with your newly registered account.";
         }
     }
+    function loggedout() {
+        if (isset($_GET['logout']) && !isset($_SESSION['id'])) {
+            echo "Logged out succesfully.";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +45,7 @@
         <?php if (!isset($_SESSION['id'])) { ?>
             <div class="container">
                 <h2>Login</h2>
-                <h3><?php registered(); ?></h3>
+                <h4><?php loggedout(); registered(); ?></h4>
                 <form action="" method="POST">
                     <input type="email" name="email" class="entry" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
                     <input type="password" name="password" class="entry" required placeholder="Password">
