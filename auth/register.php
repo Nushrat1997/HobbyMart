@@ -20,8 +20,8 @@
             <input type="text" id="name" name="name" class="entry" required placeholder="Name"><br>
             <input type="submit" name="submit" class="primary" value="Register">
         </form>
-        <form method="post">
-            <input type="submit" name="login" value="Return to login">
+        <form method="get">
+            <input type="submit" name="action" value="Return to login">
         </form>
     </div>
     <script>

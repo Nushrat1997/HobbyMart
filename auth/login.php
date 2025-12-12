@@ -15,6 +15,7 @@
                 if (password_verify($_POST['password'],$row['password'])) {
                     $_SESSION['id'] = session_id();
                     $_SESSION['admin'] = ($row['role'] == "admin");
+                    $_SESSION['guest'] = false;
                 } else {
                     echo "Incorrect username or password provided.";
                 }
@@ -31,7 +32,7 @@
     }
     function loggedout() {
         if (isset($_GET['logout']) && !isset($_SESSION['id'])) {
-            echo "Logged out succesfully.";
+            echo "Logged out successfully.";
         }
     }
 ?>
@@ -49,14 +50,14 @@
             <div class="container">
                 <h2>Login</h2>
                 <h4><?php loggedout(); registered(); ?></h4>
-                <form action="" method="POST">
+                <form method="POST">
                     <input type="email" name="email" class="entry" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
                     <input type="password" name="password" class="entry" required placeholder="Password">
                     <input type="submit" name="login" class="primary" value="Log In">
                 </form>
-                <form method="post">
-                    <input type="submit" name="register" value="Register">
-                    <input type="submit" name="guest" value="Continue as Guest">
+                <form method="get">
+                    <input type="submit" name="action" value="Register">
+                    <input type="submit" name="action" value="Continue as Guest">
                 </form>
             </div>
         <?php } else { 
