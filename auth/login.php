@@ -42,8 +42,8 @@
                 <h2>Login</h2>
                 <h3><?php registered(); ?></h3>
                 <form action="" method="POST">
-                    <input type="email" name="email" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
-                    <input type="password" name="password" required placeholder="Password">
+                    <input type="email" name="email" class="entry" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
+                    <input type="password" name="password" class="entry" required placeholder="Password">
                     <input type="submit" name="login" class="primary" value="Log In">
                 </form>
                 <form method="post">

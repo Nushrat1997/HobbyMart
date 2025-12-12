@@ -5,32 +5,36 @@
     // Check if the $_SESSION superglobal has an id value; if not, show the registration form
         if (!isset($_SESSION['id'])) {
 ?>
-    <form method="post">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required placeholder="Email" pattern="^.*@.*\..*"><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|\W)).{8,}$" oninput="validate(this)"><br>
-        <div id="invalid_warn"></div>
-        <label for="password_match">Please reenter your Password:</label>
-        <input type="password" id="password_match" name="password_match" required placeholder="Reenter password" oninput="match(this)"><br>
-        <div id="match_warn"></div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required placeholder="Name"><br>
-        <p><input type="submit" name="submit" class="primary" value="Register"></p>
-    </form>
-    <form method="post">
-        <input type="submit" name="login" value="Return to login">
-    </form>
+    <div class="container">
+        <h2>Register New User</h2>
+        <form method="post">
+            <label for="email" hidden>Email</label>
+            <input type="email" id="email" name="email" class="entry" required placeholder="Email" pattern="^.*@.*\..*"><br>
+            <label for="password" hidden>Password</label>
+            <input type="password" id="password" name="password" class="entry" required placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|\W)).{8,}$" oninput="validate(this)"><br>
+            <div id="invalid_warn" class="warning"></div>
+            <label for="password_match" hidden>Reenter password</label>
+            <input type="password" id="password_match" name="password_match" class="entry" required placeholder="Reenter password" oninput="match(this)"><br>
+            <div id="match_warn" class="warning"></div>
+            <label for="name" hidden>Name:</label>
+            <input type="text" id="name" name="name" class="entry" required placeholder="Name"><br>
+            <input type="submit" name="submit" class="primary" value="Register">
+        </form>
+        <form method="post">
+            <input type="submit" name="login" value="Return to login">
+        </form>
+    </div>
     <script>
         function validate(password) {
             warning = document.getElementById("invalid_warn");
-            requirements = ["A valid password must contain:<br>"];
+            requirements = ["<p>A valid password must contain:"];
             if (!password.checkValidity()) {
-                if (!(/^(?=.*[A-Z])/.test(password.value))) {requirements.push("at least 1 uppercase letter<br>")}
-                if (!(/^(?=.*[a-z])/.test(password.value))) {requirements.push("at least 1 lowercase letter<br>")}
-                if (!(/^(?=.*\d)/.test(password.value))) {requirements.push("at least 1 digit<br>")}
-                if (!(/^(?=.*(_|\W))/.test(password.value))) {requirements.push("at least 1 special character<br>")}
-                if (!(/^.{8,}$/.test(password.value))) {requirements.push("at least 8 characters<br>")}
+                if (!(/^(?=.*[A-Z])/.test(password.value))) {requirements.push("<br>at least 1 uppercase letter")}
+                if (!(/^(?=.*[a-z])/.test(password.value))) {requirements.push("<br>at least 1 lowercase letter")}
+                if (!(/^(?=.*\d)/.test(password.value))) {requirements.push("<br>at least 1 digit")}
+                if (!(/^(?=.*(_|\W))/.test(password.value))) {requirements.push("<br>at least 1 special character")}
+                if (!(/^.{8,}$/.test(password.value))) {requirements.push("<br>at least 8 characters")}
+                requirements.push("</p>");
                 warning.innerHTML = requirements.reduce((current,next)=> current + next);
             } else {
                 warning.innerHTML = "";
@@ -40,7 +44,7 @@
             warning = document.getElementById('match_warn');
             if (match.value != document.getElementById('password').value) {
                 match.setCustomValidity('Passwords do not match.');
-                warning.innerHTML = "Passwords do not match.";
+                warning.innerHTML = "<p>Passwords do not match.</p>";
             } else {
                 match.setCustomValidity('');
                 warning.innerHTML = "";
@@ -84,8 +88,6 @@
         <title>HobbyMart Registration</title>
     </head>
     <body>
-        <div class="container">
         <?php register(); ?>
-        </div>
     </body>
 </html>
