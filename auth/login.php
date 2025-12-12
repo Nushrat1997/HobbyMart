@@ -1,6 +1,7 @@
 <?php
     session_start();
     function login() {
+        $error ="";
         if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION['id'])) {
             $conn = new mysqli('localhost','auth','auth','HOBBYMART');
             $check = $conn->prepare("SELECT count(*) AS count FROM Users WHERE email=?");
@@ -17,14 +18,18 @@
                     $_SESSION['admin'] = ($row['role'] == "admin");
                     $_SESSION['guest'] = false;
                 } else {
-                    echo "Incorrect username or password provided.";
+                    $error = "Incorrect username or password provided.";
                 }
                 $verify->close();
+            } else {
+                $error = "Incorrect username or password provided.";
             }
             $check->close();
             $conn->close();
+            echo $error;
         }
     }
+    echo $error;
     function registered() {
         if ($_GET['registration'] == "success") {
             echo "Please log in with your newly registered account.";
@@ -45,11 +50,10 @@
     </head>
 
     <body>
-        <?php login(); ?>
         <?php if (!isset($_SESSION['id'])) { ?>
             <div class="container">
                 <h2>Login</h2>
-                <h4><?php loggedout(); registered(); ?></h4>
+                <h4><?php echo login(); loggedout(); registered(); ?></h4>
                 <form method="POST">
                     <input type="email" name="email" class="entry" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
                     <input type="password" name="password" class="entry" required placeholder="Password">
