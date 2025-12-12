@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     function login() {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION['id'])) {
             $conn = new mysqli('localhost','auth','auth','HOBBYMART');
@@ -9,12 +8,13 @@
             $check->execute();
             $exists = ($check->get_result())->fetch_assoc()['count'];
             if ($exists > 0) {
-                $verify = $conn->prepare("SELECT password FROM Users where email=?");
+                $verify = $conn->prepare("SELECT password, role FROM Users where email=?");
                 $verify->bind_param('s',$_POST['email']);
                 $verify->execute();
-                $password = ($verify->get_result())->fetch_assoc()['password'];
-                if (password_verify($_POST['password'],$password)) {
+                $row = ($verify->get_result())->fetch_assoc();
+                if (password_verify($_POST['password'],$row['password'])) {
                     $_SESSION['id'] = session_id();
+                    $_SESSION['admin'] = ($row['role'] == "admin");
                 } else {
                     echo "Incorrect username or password provided.";
                 }
