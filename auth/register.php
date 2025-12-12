@@ -53,7 +53,7 @@
     </script>
 <?php
     } else {
-        echo "You are already logged in!";
+        header("Location: http://localhost/hobbymart/");
     }
 }
     // If posting registration values without a valid session id, try to create the user

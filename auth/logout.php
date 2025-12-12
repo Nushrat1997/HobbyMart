@@ -7,4 +7,5 @@
         // Destroy the session ie. log out
         session_destroy();
     }
+    header("Location: http://localhost/hobbymart/");
 ?>

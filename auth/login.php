@@ -59,6 +59,8 @@
                     <input type="submit" name="guest" value="Continue as Guest">
                 </form>
             </div>
-        <?php } ?>
+        <?php } else { 
+            header("Location: http://localhost/hobbymart/");
+        } ?>
     </body>
 </html>
