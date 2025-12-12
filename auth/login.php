@@ -18,7 +18,10 @@
                 } else {
                     echo "Incorrect username or password provided.";
                 }
+                $verify->close();
             }
+            $check->close();
+            $conn->close();
         }
     }
     function registered() {

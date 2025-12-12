@@ -69,6 +69,9 @@
                 $insert = $conn->prepare("INSERT INTO Users(email,password,name) VALUES(?,'{$hashedPassword}',?)");
                 $insert->bind_param('ss',$_POST['email'],$_POST['name']);
                 $insert->execute();
+                $insert->close();
+                $check->close();
+                $conn->close();
                 header("Location: http://localhost/hobbymart/?registration=success");
             } catch (mysqli_sql_exception $e) {
                 echo "There was an issue with registration. Please try again or continue as a guest.";
@@ -76,7 +79,8 @@
         } else {
             echo "A user with this email address already exists. Please register a different email address.";
         }
-        mysqli_close($conn);
+        $check->close();
+        $conn->close();
     }
 ?>
 

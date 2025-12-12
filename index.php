@@ -41,7 +41,9 @@
             );
             $createUsers->bind_param('ssssssss',$admin[0],$admin[1],$admin[2],$admin[3],$user[0],$user[1],$user[2],$user[3]);
             $createUsers->execute();
+            $createUsers->close();
         }
+        $checkUsers->close();
         $checkProducts = $conn->prepare("SELECT COUNT(*) AS count FROM HOBBYMART.Products");
         $checkProducts->execute();
         $productsExists = ($checkProducts->get_result())->fetch_assoc()['count'];
@@ -54,7 +56,9 @@
                 "
             );
             $createProducts->execute();
+            $createProducts->close();
         }
+        $checkProducts->close();
         $conn->close();
     }
 
