@@ -16,7 +16,7 @@
         <div id="match_warn"></div>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required placeholder="Name"><br>
-        <p><input type="submit" name="submit" value="Register"></p>
+        <p><input type="submit" name="submit" class="primary" value="Register"></p>
     </form>
     <form method="post">
         <input type="submit" name="login" value="Return to login">
@@ -80,39 +80,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            body { 
-                font-family: Arial; 
-                background-color: #f4f4f4; 
-            }
-            .container {
-                width: 350px; 
-                margin: 100px auto; 
-                padding: 20px; 
-                background: white; 
-                border-radius: 8px; 
-                box-shadow: 0px 0px 10px #ccc;
-            }
-            input, button {
-                width: 100%; 
-                padding: 10px; 
-                margin-top: 10px;
-            }
-            input[value=Register] {
-                background-color: #007bff; 
-                border: none; 
-                color: white; 
-                cursor: pointer;
-            }
-            button {
-                background-color: #007bff; 
-                border: none; 
-                color: white; 
-                cursor: pointer;
-            }
-            .error { color: red; }
-            .success { color: green; }
-        </style>
+        <link rel="stylesheet" href="css/auth.css">
         <title>HobbyMart Registration</title>
     </head>
     <body>

@@ -31,34 +31,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="css/auth.css">
         <title>HobbyMart Login</title>
-        <style>
-            body { 
-                font-family: Arial; 
-                background-color: #f4f4f4; 
-            }
-            .container {
-                width: 350px; 
-                margin: 100px auto; 
-                padding: 20px; 
-                background: white; 
-                border-radius: 8px; 
-                box-shadow: 0px 0px 10px #ccc;
-            }
-            input, button {
-                width: 100%; 
-                padding: 10px; 
-                margin-top: 10px;
-            }
-            button {
-                background-color: #007bff; 
-                border: none; 
-                color: white; 
-                cursor: pointer;
-            }
-            .error { color: red; }
-            .success { color: green; }
-        </style>
     </head>
 
     <body>
@@ -70,7 +44,7 @@
                 <form action="" method="POST">
                     <input type="email" name="email" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
                     <input type="password" name="password" required placeholder="Password">
-                    <button type="submit">Log In</button>
+                    <input type="submit" name="login" class="primary" value="Log In">
                 </form>
                 <form method="post">
                     <input type="submit" name="register" value="Register">
