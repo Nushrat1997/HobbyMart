@@ -17,6 +17,7 @@
                     $_SESSION['id'] = session_id();
                     $_SESSION['admin'] = ($row['role'] == "admin");
                     $_SESSION['guest'] = false;
+                    header("Location: http://localhost/hobbymart/");
                 } else {
                     $error = "Incorrect username or password provided.";
                 }
