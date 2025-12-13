@@ -8,7 +8,7 @@
 ?>
     <div class="container">
         <h2>Register New User</h2>
-        <h4><?php register(); ?></h4>
+        <h4 class="warning"><?php register(); ?></h4>
         <form method="post">
             <label for="email" hidden>Email</label>
             <input type="email" id="email" name="email" class="entry" required placeholder="Email" pattern="^.*@.*\..*"><br>

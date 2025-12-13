@@ -29,18 +29,18 @@
             }
             $check->close();
             $conn->close();
-            echo $error;
+            echo "<h4 class=\"warning\">" . $error . "</h4>";
         }
     }
     
     function registered() {
         if ($_GET['registration'] == "success") {
-            echo "Please log in with your newly registered account.";
+            echo "<h4 class=\"success\">Please log in with your newly registered account.</h4>";
         }
     }
-    function loggedout() {
-        if (isset($_GET['logout']) && !isset($_SESSION['id'])) {
-            echo "Logged out successfully.";
+    function loggedOut() {
+        if ($_GET['logout'] == "success" && !isset($_SESSION['id'])) {
+            echo "<h4 class=\"success\">Logged out successfully.</h4>";
         }
     }
 ?>
@@ -56,13 +56,13 @@
         <?php if (!isset($_SESSION['id'])) { ?>
             <div class="container">
                 <h2>Login</h2>
-                <h4><?php login(); loggedout(); registered(); ?></h4>
-                <form method="POST">
+                <?php login(); loggedOut(); registered(); ?>
+                <form method="POST" action="index.php">
                     <input type="email" name="email" class="entry" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
                     <input type="password" name="password" class="entry" required placeholder="Password">
                     <input type="submit" name="login" class="primary" value="Log In">
                 </form>
-                <form method="get">
+                <form method="get" action="index.php">
                     <input type="submit" name="action" value="Register">
                     <input type="submit" name="action" value="Continue as Guest">
                 </form>

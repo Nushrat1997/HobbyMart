@@ -25,6 +25,9 @@ input.primary {
     color: white;
     cursor: pointer;
 }
+.success {
+    color: green;
+}
 .warning {
     color: red;
 }
