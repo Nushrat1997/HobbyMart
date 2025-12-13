@@ -88,11 +88,12 @@
         getRegistration();
     }
     // Page to go to if continuing as guest, or successfully logged on
-    // elseif (isset($_SESSION['id']) || $_SESSION['action'] == "Continue as Guest") {
-        // if (!isset($_SESSION['id'])) {
-            // $_SESSION['guest'] = true;
-        //}
-    //}
+    elseif (isset($_SESSION['id']) || $_GET['action'] == "Continue as Guest") {
+        if (!isset($_SESSION['id'])) {
+            $_SESSION['guest'] = true;
+        }
+        header("Location: http://localhost/hobbymart/inventory/list_products.php");
+    }
     else {
         getLogin();
     }
