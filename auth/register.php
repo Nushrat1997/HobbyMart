@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/auth/index.php";
 
     function register() {
     // Check if the $_SESSION superglobal has an id value; if not, show the registration form

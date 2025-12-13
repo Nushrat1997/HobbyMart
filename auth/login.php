@@ -1,5 +1,7 @@
 <?php
     session_start();
+    include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/auth/index.php";
+
     function login() {
         $error ="";
         if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION['id'])) {
