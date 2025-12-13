@@ -32,7 +32,7 @@
             echo $error;
         }
     }
-    echo $error;
+    
     function registered() {
         if ($_GET['registration'] == "success") {
             echo "Please log in with your newly registered account.";
@@ -56,7 +56,7 @@
         <?php if (!isset($_SESSION['id'])) { ?>
             <div class="container">
                 <h2>Login</h2>
-                <h4><?php echo login(); loggedout(); registered(); ?></h4>
+                <h4><?php login(); loggedout(); registered(); ?></h4>
                 <form method="POST">
                     <input type="email" name="email" class="entry" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
                     <input type="password" name="password" class="entry" required placeholder="Password">

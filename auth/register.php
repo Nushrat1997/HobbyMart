@@ -2,12 +2,13 @@
     session_start();
     include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/auth/index.php";
 
-    function register() {
+    function registrationForm() {
     // Check if the $_SESSION superglobal has an id value; if not, show the registration form
         if (!isset($_SESSION['id'])) {
 ?>
     <div class="container">
         <h2>Register New User</h2>
+        <h4><?php register(); ?></h4>
         <form method="post">
             <label for="email" hidden>Email</label>
             <input type="email" id="email" name="email" class="entry" required placeholder="Email" pattern="^.*@.*\..*"><br>
@@ -53,35 +54,38 @@
         }
     </script>
 <?php
-    } else {
-        header("Location: http://localhost/hobbymart/");
-    }
-}
-    // If posting registration values without a valid session id, try to create the user
-    if ($_POST['submit'] == "Register" && !isset($_SESSION['id'])) {
-        $conn = new mysqli('localhost','auth','auth','HOBBYMART');
-        $check = $conn->prepare("SELECT COUNT(*) AS registered FROM Users WHERE email=?");
-        $check->bind_param('s',$_POST['email']);
-        $check->execute();
-        $exists = ($check->get_result())->fetch_assoc()['registered'];
-        if ($exists == 0) {
-            $hashedPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
-            try {
-                $insert = $conn->prepare("INSERT INTO Users(email,password,name) VALUES(?,'{$hashedPassword}',?)");
-                $insert->bind_param('ss',$_POST['email'],$_POST['name']);
-                $insert->execute();
-                $insert->close();
-                $check->close();
-                $conn->close();
-                header("Location: http://localhost/hobbymart/?registration=success");
-            } catch (mysqli_sql_exception $e) {
-                echo "There was an issue with registration. Please try again or continue as a guest.";
-            }
         } else {
-            echo "A user with this email address already exists. Please register a different email address.";
+            header("Location: http://localhost/hobbymart/");
         }
-        $check->close();
-        $conn->close();
+    }
+
+    function register() {
+        // If posting registration values without a valid session id, try to create the user
+        if ($_POST['submit'] == "Register" && !isset($_SESSION['id'])) {
+            $conn = new mysqli('localhost','auth','auth','HOBBYMART');
+            $check = $conn->prepare("SELECT COUNT(*) AS registered FROM Users WHERE email=?");
+            $check->bind_param('s',$_POST['email']);
+            $check->execute();
+            $exists = ($check->get_result())->fetch_assoc()['registered'];
+            if ($exists == 0) {
+                $hashedPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
+                try {
+                    $insert = $conn->prepare("INSERT INTO Users(email,password,name) VALUES(?,'{$hashedPassword}',?)");
+                    $insert->bind_param('ss',$_POST['email'],$_POST['name']);
+                    $insert->execute();
+                    $insert->close();
+                    $check->close();
+                    $conn->close();
+                    header("Location: http://localhost/hobbymart/?registration=success");
+                } catch (mysqli_sql_exception $e) {
+                    echo "There was an issue with registration. Please try again or continue as a guest.";
+                }
+            } else {
+                echo "A user with this email address already exists. Please register a different email address.";
+            }
+            $check->close();
+            $conn->close();
+        }
     }
 ?>
 
@@ -93,6 +97,6 @@
         <title>HobbyMart Registration</title>
     </head>
     <body>
-        <?php register(); ?>
+        <?php registrationForm(); ?>
     </body>
 </html>
