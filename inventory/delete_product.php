@@ -1,4 +1,5 @@
 <?php
+    session_start();
 // ============================================
 // Delete Product (Admin Only)
 // Author: Xinrui Huang

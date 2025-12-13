@@ -1,4 +1,5 @@
 <?php
+    session_start();
 // ============================================
 // Product Details Page
 // Author: Xinrui Huang

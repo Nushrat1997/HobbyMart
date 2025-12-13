@@ -1,4 +1,5 @@
 <?php
+    session_start();
 // ============================================
 // Product Inventory - List of All Products
 // Author: Xinrui Huang

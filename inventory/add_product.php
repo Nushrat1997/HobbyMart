@@ -1,4 +1,5 @@
 <?php
+    session_start();
 // ============================================
 // Add New Product (Admin Only)
 // Author: Xinrui Huang
