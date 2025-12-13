@@ -1,5 +1,65 @@
 # HobbyMart – Group Project Repository
 
+## Kim Truong-Trieu - User Authentication (Login, Registration, Logout)
+
+#### Notable changes
+- Front page index.php added that selectively includes auth/login.php and auth/register.php
+- index.php creates database and tables if they do not exist already
+- Consolidated auth/login.php and auth/register.php style with CSS
+- auth/login.php connects to the database to log a user in
+- Logging in identifies user as an admin or general user with $_SESSION['admin'] boolean
+- Logout.php can be initiated by going to http://localhost/hobbymart/?logout
+- Added session information to inventory pages to be able to end the session / logout
+
+## How to run and navigate the site
+
+### 1. Install XAMPP  
+Download from the official site:  
+https://www.apachefriends.org/download.html
+
+### 2. Navigate to the install location's `htdocs` directory
+Windows: C:\xampp\htdocs\
+MacOS: /Applications/XAMPP/xamppfiles/htdocs
+Linux distributions: /opt/lampp/htdocs
+
+### 3. Clone this repository, or unarchive the HobbyMart folder
+In a terminal: git clone https://github.com/Nushrat1997/HobbyMart.git
+OR
+Unarchive the provided zip file
+
+### 4. Start Apache and MySQL
+Open **XAMPP Control Panel** → click **Start** after selecting **Apache Web Server** and **MySQL Database**.
+
+### 5. Run the site
+In any browser, navigate to http://localhost/hobbymart.
+
+## Tests
+### Registration
+- Clicking register leads to the registration form.
+- Through HTML form patterns and JavaScript, the form enforces:
+  - emails with a local-part, '@', and a domain name including top-level domain, ie. test@example.com
+  - passwords of a given complexity and a matching password reentry
+  - an entry representing a name
+- Any attempts to register an already registered account email results in a fail message on the registration screen.
+
+### Logging In or Continuing as Guest
+- Logging in with either admin@hobbymart or test@hobbymart or Continuing as a Guest directs to the inventory products page.
+- Attempting to log in with non-existing user or wrong email/password combination results in a fail message on the login screen.
+
+### Logging Out
+- Once logged in, clicking Log Out in the navigation bar will end the session, and return the user to the landing page. Alternatively, accessing http://localhost/hobbymart/?logout or http://localhost/hobbymart/auth/logout.php does the same.
+
+### Navigation Restrictions
+- Attempting to directly access the following will attempt to redirect the user to the landing page, which may further redirect a user if they are logged in:
+  - hobbymart/auth/index.php
+  - hobbymart/auth/register.php
+  - hobbymart/auth/login.php
+  - hobbymart/auth/logout.php (this will additionally clear any session that exists)
+---
+
+---
+# Previous Changes and Versions
+
 ## 👤 Nushrat Nourin – User Authentication (Login Feature)
 
 ### ✅ Feature Implemented
@@ -7,7 +67,7 @@
 - Added form validation using PHP  
 - Displayed error messages for empty fields  
 - Displayed success message for valid input  
-- Designed user interface using HTML + CSS  
+- Designed user interface using HTML + CSS
 ---
 ## 🚀 How to Run the Login Prototype
 
