@@ -30,6 +30,9 @@ $result = $conn->query($query);
     <link rel="stylesheet" href="../css/inventory.css">
 </head>
 <body>
+    <nav>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/nav.php"; ?>
+    </nav>
 <h2>Product List</h2>
 
 <!-- Link to add a new product -->

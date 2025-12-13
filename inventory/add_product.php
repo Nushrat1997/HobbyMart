@@ -52,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../css/inventory.css">
 </head>
 <body>
+    <nav>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/nav.php"; ?>
+    </nav>
     <h2>Add New Product</h2>
     <form method="post">
         <label>Name:</label><br>

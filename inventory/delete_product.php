@@ -47,6 +47,9 @@ $conn->close();
     <link rel="stylesheet" href="../css/inventory.css">
 </head>
 <body>
+    <nav>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/nav.php"; ?>
+    </nav>
     <h2>Delete Product</h2>
     <?php echo $message; ?>
     <p><a href="list_products.php" class="btn">Back to Product List</a></p>

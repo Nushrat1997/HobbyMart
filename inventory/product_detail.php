@@ -34,6 +34,9 @@ $product = $result->fetch_assoc();
     <link rel="stylesheet" href="../css/inventory.css">
 </head>
 <body>
+    <nav>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/nav.php"; ?>
+    </nav>
 <h2><?php echo htmlspecialchars($product['name']); ?></h2>
 
 <p><strong>Price:</strong> $<?php echo $product['price']; ?></p>
