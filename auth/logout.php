@@ -8,6 +8,7 @@
         session_destroy();
         // Redirect to landing page with successful log out
         header("Location: http://localhost/hobbymart/?logout=success");
+    } else {
+        header("Location: http://localhost/hobbymart/");
     }
-    header("Location: http://localhost/hobbymart/");
 ?>
