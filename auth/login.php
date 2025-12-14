@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     include $_SERVER['DOCUMENT_ROOT'] . "/HobbyMart/auth/index.php";
 
     function login() {
@@ -34,15 +36,17 @@
     }
     
     function registered() {
-        if ($_GET['registration'] == "success") {
+        if (isset($_GET['registration']) && $_GET['registration'] === "success") {
             echo "<h4 class=\"success\">Please log in with your newly registered account.</h4>";
         }
     }
+    
     function loggedOut() {
-        if ($_GET['logout'] == "success" && !isset($_SESSION['id'])) {
+        if (isset($_GET['logout']) && $_GET['logout'] === "success" && !isset($_SESSION['id'])) {
             echo "<h4 class=\"success\">Logged out successfully.</h4>";
         }
     }
+    
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +62,7 @@
                 <h2>Login</h2>
                 <?php login(); loggedOut(); registered(); ?>
                 <form method="POST" action="index.php">
-                    <input type="email" name="email" class="entry" required placeholder="Email" value="<?php echo $_POST["email"]; ?>">
+                    <input type="email" name="email" class="entry" required placeholder="Email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
                     <input type="password" name="password" class="entry" required placeholder="Password">
                     <input type="submit" name="login" class="primary" value="Log In">
                 </form>

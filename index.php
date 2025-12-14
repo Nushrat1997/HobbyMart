@@ -82,19 +82,24 @@
         }
     }
 
+    // Safe reads for GET/POST
+    $action = isset($_GET['action']) ? $_GET['action'] : null;
+    $submit = isset($_POST['submit']) ? $_POST['submit'] : null;
+
     dB_create();
     getLogout();
-    if ($_GET['action'] == "Register" || $_POST['submit'] == "Register") {
+
+    if ($action === "Register" || $submit === "Register") {
         getRegistration();
     }
     // Page to go to if continuing as guest, or successfully logged on
-    elseif (isset($_SESSION['id']) || $_GET['action'] == "Continue as Guest") {
+    elseif (isset($_SESSION['id']) || $action === "Continue as Guest") {
         if (!isset($_SESSION['id'])) {
             $_SESSION['guest'] = true;
         }
         header("Location: http://localhost/HobbyMart/inventory/list_products.php");
-    }
-    else {
+        exit;
+    } else {
         getLogin();
     }
 ?>

@@ -1,58 +1,64 @@
 <?php
-    session_start();
 // ============================================
 // Delete Product (Admin Only)
 // Author: Xinrui Huang
 // ============================================
 
-// Database connection
-// Correct Database Connection
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include __DIR__ . "/guard_admin.php";
+
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "HOBBYMART";
+$db   = "HOBBYMART";
 
 $conn = new mysqli($host, $user, $pass, $db);
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if ID is provided
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $id = $_GET['id'];
+$id = isset($_GET["id"]) ? intval($_GET["id"]) : 0;
+if ($id <= 0) {
+    header("Location: /HobbyMart/inventory/list_products.php?error=invalid_id");
+    exit;
+}
 
-    // Prepare and execute deletion
-    $stmt = $conn->prepare("DELETE FROM Products WHERE productID = ?");
-    $stmt->bind_param("i", $id);
+// Optional: get image path before delete (so we can delete file too)
+$imgPath = "";
+$get = $conn->prepare("SELECT image FROM Products WHERE productID=?");
+$get->bind_param("i", $id);
+$get->execute();
+$row = $get->get_result()->fetch_assoc();
+$get->close();
+if ($row && !empty($row["image"])) {
+    $imgPath = $row["image"];
+}
 
-    if ($stmt->execute()) {
-        $message = "<div class='success'>✅ Product deleted successfully!</div>";
-    } else {
-        $message = "<div class='error'>❌ Failed to delete product. Please try again.</div>";
+// Delete product
+$stmt = $conn->prepare("DELETE FROM Products WHERE productID=?");
+$stmt->bind_param("i", $id);
+
+if ($stmt->execute()) {
+    // Optional safe file delete: only delete files inside img/products/
+    if ($imgPath !== "" && str_starts_with($imgPath, "img/products/")) {
+        $absolute = $_SERVER["DOCUMENT_ROOT"] . "/HobbyMart/" . $imgPath;
+        if (is_file($absolute)) {
+            @unlink($absolute);
+        }
     }
 
     $stmt->close();
-} else {
-    $message = "<div class='error'>⚠️ Invalid product ID.</div>";
+    $conn->close();
+    header("Location: /HobbyMart/inventory/list_products.php?msg=deleted");
+    exit;
 }
 
+$stmt->close();
 $conn->close();
+header("Location: /HobbyMart/inventory/list_products.php?error=delete_failed");
+exit;
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Delete Product</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/inventory.css">
-</head>
-<body>
-    <nav>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . "/HobbyMart/nav.php"; ?>
-    </nav>
-    <h2>Delete Product</h2>
-    <?php echo $message; ?>
-    <p><a href="list_products.php" class="btn">Back to Product List</a></p>
-</body>
-</html>
+
 
