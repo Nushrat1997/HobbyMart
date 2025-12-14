@@ -10,7 +10,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "hobbymart";
+$db = "HOBBYMART";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <nav>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/nav.php"; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/HobbyMart/nav.php"; ?>
     </nav>
     <h2>Add New Product</h2>
     <form method="post">

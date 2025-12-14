@@ -10,7 +10,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "hobbymart";
+$db = "HOBBYMART";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
@@ -48,7 +48,7 @@ $conn->close();
 </head>
 <body>
     <nav>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/nav.php"; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/HobbyMart/nav.php"; ?>
     </nav>
     <h2>Delete Product</h2>
     <?php echo $message; ?>

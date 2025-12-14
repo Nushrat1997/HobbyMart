@@ -10,7 +10,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "hobbymart";
+$db = "HOBBYMART";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
@@ -31,7 +31,7 @@ $result = $conn->query($query);
 </head>
 <body>
     <nav>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/nav.php"; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/HobbyMart/nav.php"; ?>
     </nav>
 <h2>Product List</h2>
 

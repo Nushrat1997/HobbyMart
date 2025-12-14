@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/auth/index.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/HobbyMart/auth/index.php";
 
     function registrationForm() {
     // Check if the $_SESSION superglobal has an id value; if not, show the registration form
@@ -55,7 +55,7 @@
     </script>
 <?php
         } else {
-            header("Location: http://localhost/hobbymart/");
+            header("Location: http://localhost/HobbyMart/");
         }
     }
 
@@ -76,7 +76,7 @@
                     $insert->close();
                     $check->close();
                     $conn->close();
-                    header("Location: http://localhost/hobbymart/?registration=success");
+                    header("Location: http://localhost/HobbyMart/?registration=success");
                 } catch (mysqli_sql_exception $e) {
                     echo "There was an issue with registration. Please try again or continue as a guest.";
                 }

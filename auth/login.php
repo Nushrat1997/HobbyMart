@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include $_SERVER['DOCUMENT_ROOT'] . "/hobbymart/auth/index.php";
+    include $_SERVER['DOCUMENT_ROOT'] . "/HobbyMart/auth/index.php";
 
     function login() {
         $error ="";
@@ -19,7 +19,7 @@
                     $_SESSION['id'] = session_id();
                     $_SESSION['admin'] = ($row['role'] == "admin");
                     $_SESSION['guest'] = false;
-                    header("Location: http://localhost/hobbymart/");
+                    header("Location: http://localhost/HobbyMart/");
                 } else {
                     $error = "Incorrect username or password provided.";
                 }
@@ -68,7 +68,7 @@
                 </form>
             </div>
         <?php } else { 
-            header("Location: http://localhost/hobbymart/");
+            header("Location: http://localhost/HobbyMart/");
         } ?>
     </body>
 </html>

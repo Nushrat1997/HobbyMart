@@ -92,7 +92,7 @@
         if (!isset($_SESSION['id'])) {
             $_SESSION['guest'] = true;
         }
-        header("Location: http://localhost/hobbymart/inventory/list_products.php");
+        header("Location: http://localhost/HobbyMart/inventory/list_products.php");
     }
     else {
         getLogin();

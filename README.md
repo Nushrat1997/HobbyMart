@@ -1,16 +1,5 @@
 # HobbyMart – Group Project Repository
 
-## Kim Truong-Trieu - User Authentication (Login, Registration, Logout)
-
-#### Notable changes
-- Front page index.php added that selectively includes auth/login.php and auth/register.php
-- index.php creates database and tables if they do not exist already
-- Consolidated auth/login.php and auth/register.php style with CSS
-- auth/login.php connects to the database to log a user in
-- Logging in identifies user as an admin or general user with $_SESSION['admin'] boolean
-- Logout.php can be initiated by going to http://localhost/hobbymart/?logout
-- Added session information to inventory pages to be able to end the session / logout
-
 ## How to run and navigate the site
 
 ### 1. Install XAMPP  
@@ -31,7 +20,19 @@ Unarchive the provided zip file
 Open **XAMPP Control Panel** → click **Start** after selecting **Apache Web Server** and **MySQL Database**.
 
 ### 5. Run the site
-In any browser, navigate to http://localhost/hobbymart.
+In any browser, navigate to http://localhost/HobbyMart.
+---
+
+## Kim Truong-Trieu - User Authentication (Login, Registration, Logout)
+
+#### Notable changes
+- Front page index.php added that selectively includes auth/login.php and auth/register.php
+- index.php creates database and tables if they do not exist already
+- Consolidated auth/login.php and auth/register.php style with CSS
+- auth/login.php connects to the database to log a user in
+- Logging in identifies user as an admin or general user with $_SESSION['admin'] boolean
+- Logout.php can be initiated by going to http://localhost/HobbyMart/?logout
+- Added session information to inventory pages to be able to end the session / logout
 
 ## Tests
 ### Registration
@@ -47,14 +48,14 @@ In any browser, navigate to http://localhost/hobbymart.
 - Attempting to log in with non-existing user or wrong email/password combination results in a fail message on the login screen.
 
 ### Logging Out
-- Once logged in, clicking Log Out in the navigation bar will end the session, and return the user to the landing page. Alternatively, accessing http://localhost/hobbymart/?logout or http://localhost/hobbymart/auth/logout.php does the same.
+- Once logged in, clicking Log Out in the navigation bar will end the session, and return the user to the landing page. Alternatively, accessing http://localhost/HobbyMart/?logout or http://localhost/HobbyMart/auth/logout.php does the same.
 
 ### Navigation Restrictions
 - Attempting to directly access the following will attempt to redirect the user to the landing page, which may further redirect a user if they are logged in:
-  - hobbymart/auth/index.php
-  - hobbymart/auth/register.php
-  - hobbymart/auth/login.php
-  - hobbymart/auth/logout.php (this will additionally clear any session that exists)
+  - HobbyMart/auth/index.php
+  - HobbyMart/auth/register.php
+  - HobbyMart/auth/login.php
+  - HobbyMart/auth/logout.php (this will additionally clear any session that exists)
 ---
 
 ---
