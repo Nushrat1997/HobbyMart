@@ -2,6 +2,7 @@
 // ============================================
 // View Cart Page (UI)
 // Author: Xinrui Huang (updated)
+// FIX: Removed nested <form> (Checkout uses formaction now)
 // ============================================
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -45,7 +46,6 @@ if (count($cart) > 0) {
         $pid = (int)$row['productID'];
         $qty = isset($cart[$pid]) ? (int)$cart[$pid] : 0;
 
-        // Safety: if product removed from DB, skip it
         if ($qty <= 0) continue;
 
         $price = (float)$row['price'];
@@ -68,14 +68,13 @@ $msg = isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : "";
     <title>Your Cart - HobbyMart</title>
     <link rel="stylesheet" href="/HobbyMart/css/styles.css">
     <link rel="stylesheet" href="/HobbyMart/css/inventory.css">
+
     <style>
-        /* Keep qty input short */
         .qty-input{
             width: 70px !important;
             padding: 6px 8px !important;
         }
 
-        /* Checkout at bottom-right */
         .cart-footer{
             display: flex;
             justify-content: space-between;
@@ -88,7 +87,6 @@ $msg = isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : "";
             margin-left: auto;
         }
 
-        /* Small product image in cart */
         .cart-img{
             width: 60px;
             height: 60px;
@@ -98,7 +96,7 @@ $msg = isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : "";
             background: #f2f2f2;
         }
 
-        /* Make forms not look like big white blocks inside table */
+        /* make form not look like a big white block */
         .inline-form{
             background: transparent !important;
             padding: 0 !important;
@@ -108,7 +106,6 @@ $msg = isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : "";
     </style>
 
     <script>
-        // Simple "popup" confirm for checkout (demo-friendly)
         function confirmCheckout(){
             return confirm("Confirm payment?\nThis will reduce product stock and clear your cart.");
         }
@@ -133,6 +130,7 @@ $msg = isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : "";
     </div>
 <?php else: ?>
 
+<!-- ONE form only (no nested forms) -->
 <form class="inline-form" method="post" action="/HobbyMart/cart/cart.php">
     <table>
         <tr>
@@ -198,9 +196,16 @@ $msg = isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : "";
         </div>
 
         <div class="checkout-wrap">
-            <form class="inline-form" method="post" action="/HobbyMart/cart/checkout_process.php" onsubmit="return confirmCheckout();">
-                <button type="submit" class="btn">Checkout</button>
-            </form>
+            <!-- Checkout is NOT a new form. It's the same form, but different target. -->
+            <button
+                type="submit"
+                class="btn"
+                formaction="/HobbyMart/cart/checkout_process.php"
+                formmethod="post"
+                onclick="return confirmCheckout();"
+            >
+                Checkout
+            </button>
         </div>
     </div>
 </form>
@@ -210,6 +215,7 @@ $msg = isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : "";
 </body>
 </html>
 <?php $conn->close(); ?>
+
 
 
 
