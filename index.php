@@ -97,7 +97,12 @@
         if (!isset($_SESSION['id'])) {
             $_SESSION['guest'] = true;
         }
-        header("Location: http://localhost/HobbyMart/inventory/list_products.php");
+                // Role-based landing page after login/guest entry
+        if (isset($_SESSION['id']) && isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
+            header("Location: http://localhost/HobbyMart/inventory/list_products.php");
+        } else {
+            header("Location: http://localhost/HobbyMart/shop.php");
+        }
         exit;
     } else {
         getLogin();

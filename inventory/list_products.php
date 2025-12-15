@@ -1,8 +1,7 @@
 <?php
 // ============================================
-// Product Inventory - List of All Products
+// Product Inventory - Admin List View (Back Office)
 // Author: Xinrui Huang
-// Update: Role-based view + Thumbnail images
 // ============================================
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -19,10 +18,13 @@ if ($conn->connect_error) {
     die("Database connection failed: " . $conn->connect_error);
 }
 
+// Role flag (admin only features)
 $isAdmin = isset($_SESSION['id']) && isset($_SESSION['admin']) && $_SESSION['admin'] === true;
 
-$result = $conn->query("SELECT * FROM Products");
+// Fetch products (ordered for a cleaner list)
+$result = $conn->query("SELECT * FROM Products ORDER BY productID ASC");
 
+// Messages (optional)
 $msg = "";
 if (isset($_GET["msg"])) {
     if ($_GET["msg"] === "added")   $msg = "<div class='success'>✅ Product added successfully!</div>";
@@ -55,6 +57,7 @@ if (isset($_GET["error"])) {
     <?php echo $msg; ?>
     <?php echo $err; ?>
 
+    <!-- Admin-only Add -->
     <?php if ($isAdmin): ?>
         <p><a href="add_product.php" class="btn">Add New Product</a></p>
     <?php endif; ?>
@@ -71,7 +74,7 @@ if (isset($_GET["error"])) {
 
         <?php while ($row = $result->fetch_assoc()) { ?>
             <tr>
-                <td><?php echo $row['productID']; ?></td>
+                <td><?php echo (int)$row['productID']; ?></td>
 
                 <td>
                     <?php if (!empty($row["image"])): ?>
@@ -88,17 +91,20 @@ if (isset($_GET["error"])) {
                 <td><?php echo htmlspecialchars($row['stock']); ?></td>
 
                 <td>
-                    <a href="product_detail.php?id=<?php echo $row['productID']; ?>">View</a>
+                    <!-- ✅ Important: add return=inventory so Back always returns here -->
+                    <a href="product_detail.php?id=<?php echo (int)$row['productID']; ?>&return=inventory">View</a>
 
                     <?php if ($isAdmin): ?>
-                        | <a href="edit_product.php?id=<?php echo $row['productID']; ?>">Edit</a>
-                        | <a href="delete_product.php?id=<?php echo $row['productID']; ?>"
+                        | <a href="edit_product.php?id=<?php echo (int)$row['productID']; ?>">Edit</a>
+                        | <a href="delete_product.php?id=<?php echo (int)$row['productID']; ?>"
                              onclick="return confirm('Delete this product?');">Delete</a>
                     <?php endif; ?>
                 </td>
             </tr>
         <?php } ?>
     </table>
+
 </body>
 </html>
 <?php $conn->close(); ?>
+
